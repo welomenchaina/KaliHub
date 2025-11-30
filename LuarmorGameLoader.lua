@@ -22,3 +22,7 @@ end
 if game.GameId == 4931927012 then
     loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/5498e9ccc6fd43b77e487b0ec4724922.lua"))() -- basketball legends
 end
+
+if game.GameId == 8633498940 then
+    loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/177015ce43d8b9be1d7e703a843ffc5c.lua"))() -- highschool football
+end
