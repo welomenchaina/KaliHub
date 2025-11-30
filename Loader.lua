@@ -1,4 +1,5 @@
 local KEY_SITE_URL = "https://ads.luarmor.net/get_key?for=Kali_Hub-kRvbKFxnnbcD"
+local DISCORD_URL = "https://discord.gg/Tjb8wk6cSX"
 local SAVE_FILE = "kalisaved_key.txt"
 
 local screenGui = Instance.new("ScreenGui")
@@ -12,7 +13,7 @@ blur.Parent = game:GetService("Lighting")
 
 local mainFrame = Instance.new("Frame")
 mainFrame.Name = "MainFrame"
-mainFrame.Size = UDim2.new(0, 350, 0, 490)
+mainFrame.Size = UDim2.new(0, 350, 0, 570)
 mainFrame.Position = UDim2.new(0.5, 0, 0.5, 0)
 mainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
 mainFrame.BackgroundColor3 = Color3.fromRGB(18, 18, 24)
@@ -355,6 +356,93 @@ getKeyButton.MouseLeave:Connect(function()
     game:GetService("TweenService"):Create(getKeyStroke, TweenInfo.new(0.2), {
         Transparency = 0.4
     }):Play()
+end)
+
+local premiumContainer = Instance.new("Frame")
+premiumContainer.Size = UDim2.new(1, 0, 0, 70)
+premiumContainer.Position = UDim2.new(0, 0, 0, 290)
+premiumContainer.BackgroundColor3 = Color3.fromRGB(25, 25, 35)
+premiumContainer.BorderSizePixel = 0
+premiumContainer.Parent = contentFrame
+
+local containerRound = Instance.new("UICorner")
+containerRound.CornerRadius = UDim.new(0, 12)
+containerRound.Parent = premiumContainer
+
+local containerOutline = Instance.new("UIStroke")
+containerOutline.Color = Color3.fromRGB(88, 101, 242)
+containerOutline.Thickness = 1.5
+containerOutline.Transparency = 0.3
+containerOutline.Parent = premiumContainer
+
+local outlineColor = Instance.new("UIGradient")
+outlineColor.Color = ColorSequence.new{
+    ColorSequenceKeypoint.new(0, Color3.fromRGB(88, 101, 242)),
+    ColorSequenceKeypoint.new(0.5, Color3.fromRGB(138, 43, 226)),
+    ColorSequenceKeypoint.new(1, Color3.fromRGB(88, 101, 242))
+}
+outlineColor.Rotation = 45
+outlineColor.Parent = containerOutline
+
+local messageText = Instance.new("TextLabel")
+messageText.Size = UDim2.new(1, -20, 0, 35)
+messageText.Position = UDim2.new(0, 10, 0, 5)
+messageText.BackgroundTransparency = 1
+messageText.Text = "Tired of the key system? Buy a lifetime key for $5 at our Discord Server!"
+messageText.TextColor3 = Color3.fromRGB(200, 200, 220)
+messageText.TextSize = 12
+messageText.Font = Enum.Font.Gotham
+messageText.TextXAlignment = Enum.TextXAlignment.Center
+messageText.TextWrapped = true
+messageText.Parent = premiumContainer
+
+local joinButton = Instance.new("TextButton")
+joinButton.Size = UDim2.new(1, -20, 0, 30)
+joinButton.Position = UDim2.new(0, 10, 0, 35)
+joinButton.BackgroundColor3 = Color3.fromRGB(88, 101, 242)
+joinButton.BorderSizePixel = 0
+joinButton.Text = "💎 Join Our Discord Server"
+joinButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+joinButton.TextSize = 13
+joinButton.Font = Enum.Font.GothamBold
+joinButton.Parent = premiumContainer
+
+local buttonRound = Instance.new("UICorner")
+buttonRound.CornerRadius = UDim.new(0, 8)
+buttonRound.Parent = joinButton
+
+local buttonColor = Instance.new("UIGradient")
+buttonColor.Color = ColorSequence.new{
+    ColorSequenceKeypoint.new(0, Color3.fromRGB(88, 101, 242)),
+    ColorSequenceKeypoint.new(1, Color3.fromRGB(71, 82, 196))
+}
+buttonColor.Rotation = 45
+buttonColor.Parent = joinButton
+
+joinButton.MouseEnter:Connect(function()
+    game:GetService("TweenService"):Create(joinButton, TweenInfo.new(0.2), {
+        BackgroundColor3 = Color3.fromRGB(100, 115, 255),
+        Size = UDim2.new(1, -20, 0, 32)
+    }):Play()
+end)
+
+joinButton.MouseLeave:Connect(function()
+    game:GetService("TweenService"):Create(joinButton, TweenInfo.new(0.2), {
+        BackgroundColor3 = Color3.fromRGB(88, 101, 242),
+        Size = UDim2.new(1, -20, 0, 30)
+    }):Play()
+end)
+
+joinButton.Activated:Connect(function()
+    if setclipboard then
+        setclipboard(DISCORD_URL)
+        updateStatus("Discord link copied!", Color3.fromRGB(88, 101, 242))
+        joinButton.Text = "✓ Link Copied to Clipboard!"
+        task.delay(2, function()
+            joinButton.Text = "💎 Join Our Discord Server"
+            updateStatus("Ready to verify your key", Color3.fromRGB(140, 140, 160))
+        end)
+    end
 end)
 
 local keyValidated = false
