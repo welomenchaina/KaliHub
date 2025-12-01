@@ -35,6 +35,6 @@ if game.GameId == 8633498940 then
     loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/177015ce43d8b9be1d7e703a843ffc5c.lua"))() -- highschool football
 end
 
-if game.GameId == 99588440661442 then
+if game.GameId == 8558141897 then
     loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/d01dc3f269e8e5464deb46c49bc8b408.lua"))() -- flag football
 end
