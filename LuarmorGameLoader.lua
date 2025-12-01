@@ -3,6 +3,14 @@ repeat task.wait() until game:IsLoaded()
 local cloneref = cloneref or function(v) return v end
 local Plr = cloneref(game:GetService("Players").LocalPlayer) or game.Players.LocalPlayer
 
+if string.split(identifyexecutor() or "None", " ")[1] == "Xeno" or not identifyexecutor then
+game:GetService("StarterGui"):SetCore("SendNotification", {
+    Title = "Trash Executor",
+    Text = "Your executor may not support certain features, or may be laggy.",
+    Duration = 5
+})
+end
+
 if not script_key then
     Plr:Kick("You haven't entered a key please enter a key otherwise you wont gain access")
 end
