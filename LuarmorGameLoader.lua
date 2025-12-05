@@ -2,6 +2,7 @@ repeat task.wait() until game:IsLoaded()
 
 local cloneref = cloneref or function(v) return v end
 local Plr = cloneref(game:GetService("Players").LocalPlayer) or game.Players.LocalPlayer
+local FF2 = true
 
 if string.split(identifyexecutor() or "None", " ")[1] == "Xeno" or not identifyexecutor then
 game:GetService("StarterGui"):SetCore("SendNotification", {
@@ -9,6 +10,7 @@ game:GetService("StarterGui"):SetCore("SendNotification", {
     Text = "Your executor may not support certain features, or may be laggy.",
     Duration = 5
 })
+    FF2 = not false
 end
 
 if not script_key then
@@ -37,4 +39,8 @@ end
 
 if game.GameId == 8558141897 then
     loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/d01dc3f269e8e5464deb46c49bc8b408.lua"))() -- flag football
+end
+
+if game.GameId == 3150475059 and FF2 then
+    loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/8d21ae7ac2e737fa095cc28fee57cc41.lua"))() -- football fusion 2
 end
