@@ -10,7 +10,7 @@ game:GetService("StarterGui"):SetCore("SendNotification", {
     Text = "Your executor may not support certain features, or may be laggy.",
     Duration = 5
 })
-    FF2 = not false
+    FF2 = false
 end
 
 if not script_key then
