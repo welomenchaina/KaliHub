@@ -1,6 +1,211 @@
+local Keyless = getgenv().Keyless or false
+local PaidOnly = getgenv().PaidOnly or false
+
 local KEY_SITE_URL = "https://ads.luarmor.net/get_key?for=Kali_Hub-kRvbKFxnnbcD"
 local DISCORD_URL = "https://discord.gg/Tjb8wk6cSX"
 local SAVE_FILE = "kalisaved_key.txt"
+
+if PaidOnly then
+    local screenGui = Instance.new("ScreenGui")
+    screenGui.Name = "PaidOnlyGui"
+    screenGui.ResetOnSpawn = false
+    screenGui.Parent = game:GetService("CoreGui")
+
+    local blur = Instance.new("BlurEffect")
+    blur.Size = 5
+    blur.Parent = game:GetService("Lighting")
+
+    local mainFrame = Instance.new("Frame")
+    mainFrame.Name = "MainFrame"
+    mainFrame.Size = UDim2.new(0, 350, 0, 300)
+    mainFrame.Position = UDim2.new(0.5, 0, 0.5, 0)
+    mainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
+    mainFrame.BackgroundColor3 = Color3.fromRGB(18, 18, 24)
+    mainFrame.BorderSizePixel = 0
+    mainFrame.Active = true
+    mainFrame.Draggable = true
+    mainFrame.Parent = screenGui
+
+    local mainCorner = Instance.new("UICorner")
+    mainCorner.CornerRadius = UDim.new(0, 20)
+    mainCorner.Parent = mainFrame
+
+    local shadowStroke = Instance.new("UIStroke")
+    shadowStroke.Color = Color3.fromRGB(100, 100, 255)
+    shadowStroke.Thickness = 1
+    shadowStroke.Transparency = 0.6
+    shadowStroke.Parent = mainFrame
+
+    local shadowGradient = Instance.new("UIGradient")
+    shadowGradient.Color = ColorSequence.new{
+        ColorSequenceKeypoint.new(0, Color3.fromRGB(138, 43, 226)),
+        ColorSequenceKeypoint.new(0.5, Color3.fromRGB(75, 0, 130)),
+        ColorSequenceKeypoint.new(1, Color3.fromRGB(138, 43, 226))
+    }
+    shadowGradient.Rotation = 45
+    shadowGradient.Parent = shadowStroke
+
+    local gradientOverlay = Instance.new("Frame")
+    gradientOverlay.Size = UDim2.new(1, 0, 0, 4)
+    gradientOverlay.Position = UDim2.new(0, 0, 0, 0)
+    gradientOverlay.BackgroundTransparency = 0
+    gradientOverlay.BorderSizePixel = 0
+    gradientOverlay.ZIndex = 2
+    gradientOverlay.Parent = mainFrame
+
+    local overlayCorner = Instance.new("UICorner")
+    overlayCorner.CornerRadius = UDim.new(0, 20)
+    overlayCorner.Parent = gradientOverlay
+
+    local overlayGradient = Instance.new("UIGradient")
+    overlayGradient.Color = ColorSequence.new{
+        ColorSequenceKeypoint.new(0, Color3.fromRGB(138, 43, 226)),
+        ColorSequenceKeypoint.new(0.5, Color3.fromRGB(75, 0, 130)),
+        ColorSequenceKeypoint.new(1, Color3.fromRGB(138, 43, 226))
+    }
+    overlayGradient.Rotation = 0
+    overlayGradient.Parent = gradientOverlay
+
+    game:GetService("RunService").Heartbeat:Connect(function()
+        if overlayGradient then
+            overlayGradient.Rotation = (overlayGradient.Rotation + 0.5) % 360
+        end
+    end)
+
+    local iconLabel = Instance.new("TextLabel")
+    iconLabel.Size = UDim2.new(0, 60, 0, 60)
+    iconLabel.Position = UDim2.new(0.5, -30, 0, 20)
+    iconLabel.BackgroundColor3 = Color3.fromRGB(25, 25, 35)
+    iconLabel.BorderSizePixel = 0
+    iconLabel.Text = "💎"
+    iconLabel.TextScaled = true
+    iconLabel.Font = Enum.Font.GothamBold
+    iconLabel.Parent = mainFrame
+
+    local iconCorner = Instance.new("UICorner")
+    iconCorner.CornerRadius = UDim.new(1, 0)
+    iconCorner.Parent = iconLabel
+
+    local iconStroke = Instance.new("UIStroke")
+    iconStroke.Color = Color3.fromRGB(138, 43, 226)
+    iconStroke.Thickness = 2
+    iconStroke.Transparency = 0.3
+    iconStroke.Parent = iconLabel
+
+    local titleLabel = Instance.new("TextLabel")
+    titleLabel.Size = UDim2.new(1, -40, 0, 35)
+    titleLabel.Position = UDim2.new(0, 20, 0, 85)
+    titleLabel.BackgroundTransparency = 1
+    titleLabel.Text = "Kali Hub Premium"
+    titleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+    titleLabel.TextSize = 26
+    titleLabel.Font = Enum.Font.GothamBold
+    titleLabel.TextXAlignment = Enum.TextXAlignment.Center
+    titleLabel.Parent = mainFrame
+
+    local messageText = Instance.new("TextLabel")
+    messageText.Size = UDim2.new(1, -40, 0, 60)
+    messageText.Position = UDim2.new(0, 20, 0, 125)
+    messageText.BackgroundTransparency = 1
+    messageText.Text = "This is a paid-only version.\nJoin our Discord and purchase lifetime access for $5!"
+    messageText.TextColor3 = Color3.fromRGB(200, 200, 220)
+    messageText.TextSize = 13
+    messageText.Font = Enum.Font.Gotham
+    messageText.TextXAlignment = Enum.TextXAlignment.Center
+    messageText.TextWrapped = true
+    messageText.Parent = mainFrame
+
+    local joinButton = Instance.new("TextButton")
+    joinButton.Size = UDim2.new(1, -40, 0, 45)
+    joinButton.Position = UDim2.new(0, 20, 0, 195)
+    joinButton.BackgroundColor3 = Color3.fromRGB(88, 101, 242)
+    joinButton.BorderSizePixel = 0
+    joinButton.Text = "💎 Join Discord & Purchase"
+    joinButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+    joinButton.TextSize = 15
+    joinButton.Font = Enum.Font.GothamBold
+    joinButton.Parent = mainFrame
+
+    local buttonRound = Instance.new("UICorner")
+    buttonRound.CornerRadius = UDim.new(0, 10)
+    buttonRound.Parent = joinButton
+
+    local buttonColor = Instance.new("UIGradient")
+    buttonColor.Color = ColorSequence.new{
+        ColorSequenceKeypoint.new(0, Color3.fromRGB(88, 101, 242)),
+        ColorSequenceKeypoint.new(1, Color3.fromRGB(71, 82, 196))
+    }
+    buttonColor.Rotation = 45
+    buttonColor.Parent = joinButton
+
+    joinButton.MouseEnter:Connect(function()
+        game:GetService("TweenService"):Create(joinButton, TweenInfo.new(0.2), {
+            BackgroundColor3 = Color3.fromRGB(100, 115, 255),
+            Size = UDim2.new(1, -40, 0, 47)
+        }):Play()
+    end)
+
+    joinButton.MouseLeave:Connect(function()
+        game:GetService("TweenService"):Create(joinButton, TweenInfo.new(0.2), {
+            BackgroundColor3 = Color3.fromRGB(88, 101, 242),
+            Size = UDim2.new(1, -40, 0, 45)
+        }):Play()
+    end)
+
+    joinButton.Activated:Connect(function()
+        if setclipboard then
+            setclipboard(DISCORD_URL)
+            joinButton.Text = "✓ Discord Link Copied!"
+            task.delay(2, function()
+                joinButton.Text = "💎 Join Discord & Purchase"
+            end)
+        end
+    end)
+
+    local closeButton = Instance.new("TextButton")
+    closeButton.Size = UDim2.new(0, 40, 0, 40)
+    closeButton.Position = UDim2.new(1, -50, 0, 15)
+    closeButton.BackgroundColor3 = Color3.fromRGB(30, 30, 40)
+    closeButton.BorderSizePixel = 0
+    closeButton.Text = "x"
+    closeButton.TextColor3 = Color3.fromRGB(220, 220, 230)
+    closeButton.TextSize = 20
+    closeButton.Font = Enum.Font.GothamBold
+    closeButton.ZIndex = 3
+    closeButton.Parent = mainFrame
+
+    local closeCorner = Instance.new("UICorner")
+    closeCorner.CornerRadius = UDim.new(1, 0)
+    closeCorner.Parent = closeButton
+
+    closeButton.MouseEnter:Connect(function()
+        game:GetService("TweenService"):Create(closeButton, TweenInfo.new(0.2), {
+            BackgroundColor3 = Color3.fromRGB(220, 50, 80)
+        }):Play()
+    end)
+
+    closeButton.MouseLeave:Connect(function()
+        game:GetService("TweenService"):Create(closeButton, TweenInfo.new(0.2), {
+            BackgroundColor3 = Color3.fromRGB(30, 30, 40)
+        }):Play()
+    end)
+
+    closeButton.Activated:Connect(function()
+        blur:Destroy()
+        screenGui:Destroy()
+    end)
+
+    return
+end
+
+if Keyless then
+    _G.script_key = "keyless_mode"
+    script_key = "keyless_mode"
+    pcall(function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/welomenchaina/KaliHub/refs/heads/main/LuarmorGameLoader.lua",true))()
+    end)
+    return
+end
 
 local screenGui = Instance.new("ScreenGui")
 screenGui.Name = "KeySystemGui"
