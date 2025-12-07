@@ -1,7 +1,7 @@
 repeat task.wait() until game:IsLoaded()
 
 local Keyless = getgenv().Keyless or false
-local PaidOnly = getgenv().PaidOnly or false
+local PaidOnly = getgenv().PaidOnly or true
 
 local cloneref = cloneref or function(v) return v end
 local Plr = cloneref(game:GetService("Players").LocalPlayer) or game.Players.LocalPlayer
